@@ -7,20 +7,16 @@ import javax.swing.table.*;
 
 public class MatrixCalculator
 {
-
 private boolean DEBUG = false;
 private boolean INFO = true;
-
 private static int max = 100;
 private static int decimals = 3;
-
 private JLabel statusBar;
 private JTextArea taA, taB, taC;
 private int iDF = 0;
 private int n = 4;
 private int m;
 private static NumberFormat nf;
-
 
 public Component createComponents() 
 {
@@ -186,7 +182,6 @@ public Component createComponents()
     
     return fpane;
 }
-
 /*== Setup Invidual Matrix Panes ==*/
 private JPanel MatrixPane(String str, JTextArea ta)
 {
@@ -205,7 +200,6 @@ private JPanel MatrixPane(String str, JTextArea ta)
     
     return pane;
 }    
-
 public static void main(String[] args) 
 {
     JFrame frame = new JFrame("Matrix Calculator");
@@ -226,18 +220,8 @@ public static void main(String[] args)
     nf.setMinimumFractionDigits(1);
     nf.setMaximumFractionDigits(decimals); 
     
-}
-
-
+} 
 // ------------------------------------------------------------------------------ 
-// ------------------------------------------------------------------------------ 
-
-/*== NO MORE GUI CRAP -- LET'S DO SOME REAL WORK ==*/
-
-// ------------------------------------------------------------------------------ 
-// ------------------------------------------------------------------------------ 
-
-
 public float[][] ReadInMatrix(JTextArea ta) throws Exception
 {
     if (DEBUG) { System.out.println("Reading In Matrix"); }
@@ -303,7 +287,6 @@ public float[][] ReadInMatrix(JTextArea ta) throws Exception
  
     return matrix;
 }
-
 //--------------------------------------------------------------
 // Display Matrix in TextArea
 //--------------------------------------------------------------
@@ -331,9 +314,7 @@ public void DisplayMatrix(float[][] matrix, JTextArea ta)
     
     ta.setText(rstr);
 }
-
-
-
+//--------------------------------------------------------------
 public float[][] AddMatrix(float[][] a, float[][] b) throws Exception
 {
     int tmsA = a.length; int tmsB = b.length; int tmsAr = a[0].length; int tmsBr = b[0].length;
@@ -363,7 +344,7 @@ public float[][] AddMatrix(float[][] a, float[][] b) throws Exception
     
 	return matrix1;
 }
-
+//--------------------------------------------------------------
 public float[][] SubtractMatrix(float[][] a, float[][] b) throws Exception
 {
     int tmsA = a.length; int tmsB = b.length; int tmsAr = a[0].length; int tmsBr = b[0].length;
@@ -393,7 +374,6 @@ public float[][] SubtractMatrix(float[][] a, float[][] b) throws Exception
     
 	return matrix1;
 }
-
 //--------------------------------------------------------------
 public float[][] MultiplyMatrix(float[][] a, float[][] b) throws Exception
 {
@@ -446,7 +426,7 @@ public float[][] MultiplyMatrix(float[][] a, float[][] b) throws Exception
 
     return matrix1;
 }
-
+//--------------------------------------------------------------
 public float[][] MultiplyMatrixToC(float[][] a, float[][] b) throws Exception
 {
 
@@ -471,7 +451,6 @@ public float[][] MultiplyMatrixToC(float[][] a, float[][] b) throws Exception
     
 }
 //--------------------------------------------------------------
-
 public float[][] Transpose(float[][] a)
 {
     if (INFO) { System.out.println("Performing Transpose..."); }
@@ -488,9 +467,7 @@ public float[][] Transpose(float[][] a)
 
     return m;
 }
-
 //--------------------------------------------------------------
-
 public float[][] Inverse(float[][] a) throws Exception
 {
     // Formula used to Calculate Inverse:
@@ -520,9 +497,7 @@ public float[][] Inverse(float[][] a) throws Exception
 
     return m;
 }
-
 //--------------------------------------------------------------
-
 public float[][] Adjoint(float[][] a) throws Exception
 {
     if (INFO) { System.out.println("Performing Adjoint..."); }
@@ -604,9 +579,7 @@ public float[][] Adjoint(float[][] a) throws Exception
 
     return n;
 }
-
 //--------------------------------------------------------------
-
 public float[][] UpperTriangle(float[][] m)
 {
     if (INFO) { System.out.println("Converting to Upper Triangle..."); }
@@ -660,9 +633,7 @@ catch(Exception e) { System.out.println("Still Here!!!"); }
 
     return m;
 }
-
 //--------------------------------------------------------------
-
 public float Determinant(float[][] matrix)
 {
     if (INFO) { System.out.println("Getting Determinant..."); }
@@ -686,7 +657,7 @@ public float Determinant(float[][] matrix)
     	return 1/0;
     }
 }
-
+//--------------------------------------------------------------
 public float Trace(float[][] matrix) {
 	
 	if (INFO) { System.out.println("Getting Trace..."); }
