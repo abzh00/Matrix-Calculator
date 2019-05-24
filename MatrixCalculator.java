@@ -53,6 +53,7 @@ public Component createComponents()
     JButton btnCmA = new JButton("constant(B)*A = C");
     JButton btnAsB = new JButton("A - B = C");
     JButton btnTrA = new JButton("Trace(A) = C");
+    JButton btnColl = new JButton("Coll_or_Not");
     JButton btnArea = new JButton("Area of Triangle(A)");
     paneBtn.add(btnApB);
     paneBtn.add(btnAsB);
@@ -66,6 +67,7 @@ public Component createComponents()
     paneBtn.add(btnDetA);
     paneBtn.add(btnDetB);
     paneBtn.add(btnTrA);
+    paneBtn.add(btnColl);
     paneBtn.add(btnArea);
     
     
@@ -171,6 +173,14 @@ public Component createComponents()
         public void actionPerformed(ActionEvent evt) 
         { 
             try { taC.setText("Area is: " + nf.format(AreaofTri(ReadInMatrix(taA)))); }
+            catch(Exception e) { System.err.println("Error: " + e); } 
+        }
+    });
+    
+    btnColl.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) 
+        { 
+            try { taC.setText((CollOrNot(ReadInMatrix(taA)))); }
             catch(Exception e) { System.err.println("Error: " + e); } 
         }
     });
@@ -668,6 +678,7 @@ public float Determinant(float[][] matrix)
 }
 //--------------------------------------------------------------
 public float Trace(float[][] matrix) {
+	
 	if (INFO) { System.out.println("Getting Trace..."); }
     int tms = matrix.length;
     int tmsr = matrix[0].length;
@@ -680,6 +691,24 @@ public float Trace(float[][] matrix) {
     }else {
     	return 1/0;
     }	
+}
+//--------------------------------------------------------------
+public String CollOrNot(float[][] matrix) {
+	int tms = matrix.length;
+	int tmsr = matrix[0].length;
+	
+	if (tms == 3 && tmsr == 2) {
+		float n = AreaofTri(matrix);
+		if (n==0) {
+			return "Is Collinear";
+		}else {
+			return "Is Not Collinear";
+		}
+	}else {
+		if (INFO) { System.out.println("Enter 3 point"); }
+		return "Enter 3 point";
+	}
+	
 }
 //--------------------------------------------------------------
 public float AreaofTri(float[][] matrix) {
