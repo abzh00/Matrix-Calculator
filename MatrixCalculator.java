@@ -364,13 +364,13 @@ public float[][] AddMatrix(float[][] a, float[][] b) throws Exception
         	}
     	}
     }else {
+    	if (INFO) { System.out.println("Invalid input"); }
     	for (int i=0; i<tmsB; i++) {
         	for (int j = 0; j < tmsBr; j++) {
         		matrix1[i][j] = matrix[i][j];
         	}
     	}
     }
-    
 	return matrix1;
 }
 //--------------------------------------------------------------
@@ -394,6 +394,7 @@ public float[][] SubtractMatrix(float[][] a, float[][] b) throws Exception
         	}
     	}
     }else {
+    	if (INFO) { System.out.println("Invalid input"); }
     	for (int i=0; i<tmsB; i++) {
         	for (int j = 0; j < tmsBr; j++) {
         		matrix1[i][j] = matrix[i][j];
@@ -431,6 +432,7 @@ public float[][] MultiplyMatrix(float[][] a, float[][] b) throws Exception
         	}
     	}
     }else if(tmsAr > tmsB) {
+    	if (INFO) { System.out.println("Invalid input"); }
     	for (int i=0; i < tmsA; i++)
     		for (int j=0; j < tmsBr; j++) matrix[i][j]=0;
 
@@ -441,6 +443,7 @@ public float[][] MultiplyMatrix(float[][] a, float[][] b) throws Exception
     			matrix[i][j] += a[i][p]*b[p][j];
     	}
     }else {
+    	if (INFO) { System.out.println("Invalid input"); }
     	for (int i=0; i < tmsA; i++)
     		for (int j=0; j < tmsBr; j++) matrix[i][j]=0;
 
@@ -471,6 +474,7 @@ public float[][] MultiplyMatrixToC(float[][] a, float[][] b) throws Exception
     	}
     	return matrix;
     }else {
+    	if (INFO) { System.out.println("Invalid input"); }
     	float matrix1[][] = new float[1][1];
     	return matrix1;
     }
@@ -683,6 +687,7 @@ public float Determinant(float[][] matrix)
     	if (INFO) { System.out.println("Determinant: " + det); }
     	return det;
     }else {
+    	if (INFO) { System.out.println("Invalid input"); }
     	return 1/0;
     }
 }
@@ -699,6 +704,7 @@ public float Trace(float[][] matrix) {
     	}
     	return tr;
     }else {
+    	if (INFO) { System.out.println("Invalid input"); }
     	return 1/0;
     }	
 }
