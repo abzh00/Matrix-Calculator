@@ -40,7 +40,7 @@ public Component createComponents()
     /*== OPERATION BUTTONS ==*/
     JPanel paneBtn = new JPanel();
     paneBtn.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-    paneBtn.setLayout(new GridLayout(4,3));
+    paneBtn.setLayout(new GridLayout(5,3));
     JButton btnApB = new JButton("A + B = C");
     JButton btnAmB = new JButton("A * B = C");
     JButton btnBmA = new JButton("B * A = C");
@@ -55,6 +55,7 @@ public Component createComponents()
     JButton btnTrA = new JButton("Trace(A) = C");
     JButton btnColl = new JButton("Coll_or_Not");
     JButton btnArea = new JButton("Area of Triangle(A)");
+    JButton btnC = new JButton("C");
     paneBtn.add(btnApB);
     paneBtn.add(btnAsB);
     paneBtn.add(btnCmA);
@@ -69,6 +70,7 @@ public Component createComponents()
     paneBtn.add(btnTrA);
     paneBtn.add(btnColl);
     paneBtn.add(btnArea);
+    paneBtn.add(btnC);
     
     
     
@@ -181,6 +183,14 @@ public Component createComponents()
         public void actionPerformed(ActionEvent evt) 
         { 
             try { taC.setText((CollOrNot(ReadInMatrix(taA)))); }
+            catch(Exception e) { System.err.println("Error: " + e); } 
+        }
+    });
+    
+    btnC.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) 
+        { 
+            try {taA.setText(""); taB.setText(""); taC.setText("");}
             catch(Exception e) { System.err.println("Error: " + e); } 
         }
     });
