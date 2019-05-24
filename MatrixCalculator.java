@@ -40,7 +40,7 @@ public Component createComponents()
     /*== OPERATION BUTTONS ==*/
     JPanel paneBtn = new JPanel();
     paneBtn.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-    paneBtn.setLayout(new GridLayout(5,3));
+    paneBtn.setLayout(new GridLayout(4,4));
     JButton btnApB = new JButton("A + B = C");
     JButton btnAmB = new JButton("A * B = C");
     JButton btnBmA = new JButton("B * A = C");
@@ -53,27 +53,27 @@ public Component createComponents()
     JButton btnCmA = new JButton("constant(B)*A = C");
     JButton btnAsB = new JButton("A - B = C");
     JButton btnTrA = new JButton("Trace(A) = C");
-    JButton btnColl = new JButton("Coll_or_Not");
+    JButton btnColl = new JButton("Coll_or_Not(A)");
     JButton btnArea = new JButton("Area of Triangle(A)");
     JButton btnC = new JButton("C");
+    JButton btnCof = new JButton("Cofactor(A)");
     paneBtn.add(btnApB);
     paneBtn.add(btnAsB);
-    paneBtn.add(btnCmA);
     paneBtn.add(btnAmB);
     paneBtn.add(btnBmA);
+    paneBtn.add(btnCmA);
+    paneBtn.add(btnTrnsA);
+    paneBtn.add(btnCof);
     paneBtn.add(btnAdjA);
     paneBtn.add(btnInvA);
-    paneBtn.add(btnInvB);
-    paneBtn.add(btnTrnsA);
+    paneBtn.add(btnInvB);    
     paneBtn.add(btnDetA);
     paneBtn.add(btnDetB);
     paneBtn.add(btnTrA);
     paneBtn.add(btnColl);
     paneBtn.add(btnArea);
     paneBtn.add(btnC);
-    
-    
-    
+     
     /*== ADD BUTTON Listeners ==*/
     btnApB.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) 
@@ -147,6 +147,14 @@ public Component createComponents()
         }
     }); 
 
+    btnCof.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) 
+        { 
+            try { DisplayMatrix(Cofactor(ReadInMatrix(taA)), taC); }
+            catch(Exception e) { System.err.println("Error: " + e); } 
+        }
+    }); 
+    
     btnDetA.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) 
         { 
@@ -363,15 +371,11 @@ public float[][] AddMatrix(float[][] a, float[][] b) throws Exception
         		matrix1[i][j] = matrix[i][j];
         	}
     	}
+    	return matrix1;
     }else {
     	if (INFO) { System.out.println("Invalid input"); }
-    	for (int i=0; i<tmsB; i++) {
-        	for (int j = 0; j < tmsBr; j++) {
-        		matrix1[i][j] = matrix[i][j];
-        	}
-    	}
+    	return null;
     }
-	return matrix1;
 }
 //--------------------------------------------------------------
 public float[][] SubtractMatrix(float[][] a, float[][] b) throws Exception
@@ -393,16 +397,11 @@ public float[][] SubtractMatrix(float[][] a, float[][] b) throws Exception
         		matrix1[i][j] = matrix[i][j];
         	}
     	}
+    	return matrix1;
     }else {
     	if (INFO) { System.out.println("Invalid input"); }
-    	for (int i=0; i<tmsB; i++) {
-        	for (int j = 0; j < tmsBr; j++) {
-        		matrix1[i][j] = matrix[i][j];
-        	}
-    	}
+    	return null;
     }
-    
-	return matrix1;
 }
 //--------------------------------------------------------------
 public float[][] MultiplyMatrix(float[][] a, float[][] b) throws Exception
@@ -431,32 +430,11 @@ public float[][] MultiplyMatrix(float[][] a, float[][] b) throws Exception
         		matrix1[i][j] = matrix[i][j];
         	}
     	}
-    }else if(tmsAr > tmsB) {
-    	if (INFO) { System.out.println("Invalid input"); }
-    	for (int i=0; i < tmsA; i++)
-    		for (int j=0; j < tmsBr; j++) matrix[i][j]=0;
-
-    	for (int i=0; i < tmsA; i++)
-    	for (int j=0; j < tmsBr; j++)
-    	{
-    		for (int p=0; p < tmsAr; p++)
-    			matrix[i][j] += a[i][p]*b[p][j];
-    	}
+    	return matrix1;
     }else {
     	if (INFO) { System.out.println("Invalid input"); }
-    	for (int i=0; i < tmsA; i++)
-    		for (int j=0; j < tmsBr; j++) matrix[i][j]=0;
-
-    	for (int i=0; i < tmsA; i++)
-    	for (int j=0; j < tmsBr; j++)
-    	{
-    		for (int p=0; p < tmsB; p++)
-    			matrix[i][j] += a[i][p]*b[p][j];
-    	}
+    	return null;
     }
-    
-
-    return matrix1;
 }
 //--------------------------------------------------------------
 public float[][] MultiplyMatrixToC(float[][] a, float[][] b) throws Exception
@@ -475,13 +453,8 @@ public float[][] MultiplyMatrixToC(float[][] a, float[][] b) throws Exception
     	return matrix;
     }else {
     	if (INFO) { System.out.println("Invalid input"); }
-    	float matrix1[][] = new float[1][1];
-    	return matrix1;
+    	return null;
     }
-    
-    
-
-    
 }
 //--------------------------------------------------------------
 public float[][] Transpose(float[][] a)
@@ -497,7 +470,6 @@ public float[][] Transpose(float[][] a)
     {
         m[i][j] = a[j][i];
     }
-
     return m;
 }
 //--------------------------------------------------------------
@@ -674,7 +646,6 @@ public float Determinant(float[][] matrix)
     int tmsr = matrix[0].length;
     
     if (tms==tmsr) {
-    
     	float det=1;
 
     	matrix = UpperTriangle(matrix);
@@ -747,5 +718,24 @@ public float AreaofTri(float[][] matrix) {
 		if (INFO) { System.out.println("Enter 3 point"); }
 		return 1/0;
 	}
+}
+//--------------------------------------------------------------
+public float[][] Cofactor(float[][] matrix){
+	int tms = matrix.length;
+	int tmsr = matrix[0].length;
+	float n[][] = null;
+	if (tms==tmsr) {
+		try {
+			n = Transpose(Adjoint(matrix));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}else {
+		if (INFO) { System.out.println("Invalid input"); }
+		return null;
+	}
+	return n;
 }
 }
